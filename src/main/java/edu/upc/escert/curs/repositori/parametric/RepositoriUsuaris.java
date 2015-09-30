@@ -1,5 +1,6 @@
 package edu.upc.escert.curs.repositori.parametric;
 
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +27,7 @@ public class RepositoriUsuaris extends Repositori implements IRepositoriUsuaris 
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement("SELECT count(*) FROM USUARIS WHERE USERNAME=? AND PASSWORD=?");
 			pstmt.setString(1,username);
-			pstmt.setString(2,password);
+			pstmt.setString(2,generarHash(password));
 			rs=pstmt.executeQuery();
 			rs.next();
 			int n=rs.getInt(1);
@@ -50,7 +51,7 @@ public class RepositoriUsuaris extends Repositori implements IRepositoriUsuaris 
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement("INSERT INTO USUARIS VALUES (?,?,?)");
 			pstmt.setString(1,username);
-			pstmt.setString(2,password);
+			pstmt.setString(2,generarHash(password));
 			pstmt.setString(3,rol);
 			pstmt.execute();
 		} catch (SQLException e) {
@@ -60,6 +61,19 @@ public class RepositoriUsuaris extends Repositori implements IRepositoriUsuaris 
 			try {conn.close();} catch (Exception e1) {;}
 			try {pstmt.close();} catch (Exception e2) {;}
 		}
+	}
+
+	private String generarHash(String password) {
+		String hash=null;
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(password.getBytes("UTF-8"));
+			byte[] digest = md.digest();
+			hash=String.format("%064x", new java.math.BigInteger(1, digest));
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return hash;
 	}
 
 }

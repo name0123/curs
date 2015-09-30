@@ -1,11 +1,11 @@
 package edu.upc.escert.curs.repositori;
 
-import edu.upc.escert.curs.repositori.vulnerable.*;
+import edu.upc.escert.curs.repositori.parametric.*;
 
 public class RepositoriFactory {
-	
+
 	static IRepositoriUsuaris repositoriUsuaris=new RepositoriUsuaris();
-	static IRepositoriComentaris repositoriComentaris=new RepositoriComentaris();	
+	static IRepositoriComentaris repositoriComentaris=new RepositoriComentaris();
 
 	public static IRepositoriUsuaris getRepositoriUsuaris() {
 		return repositoriUsuaris;
@@ -14,5 +14,5 @@ public class RepositoriFactory {
 	public static IRepositoriComentaris getRepositoriComentaris() {
 		return repositoriComentaris;
 	}
-	
+
 }

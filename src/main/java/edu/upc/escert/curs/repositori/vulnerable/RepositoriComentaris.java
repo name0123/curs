@@ -70,8 +70,8 @@ public class RepositoriComentaris extends Repositori implements IRepositoriComen
 	}
 
 	@Override
-	public List<Comentari> getComentarisPerId (int id) {
-		return getComentarisFromSQL("SELECT * FROM COMENTARIS WHERE ID="+id);
+	public Comentari getComentariPerId (int id) {
+		return getComentarisFromSQL("SELECT * FROM COMENTARIS WHERE ID="+id).get(0);
 	}
 
 	@Override

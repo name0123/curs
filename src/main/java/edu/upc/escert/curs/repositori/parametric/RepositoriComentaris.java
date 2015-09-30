@@ -95,8 +95,8 @@ public class RepositoriComentaris extends Repositori implements IRepositoriComen
 	}
 
 	@Override
-	public List<Comentari> getComentarisPerId (int id) {
-		List<Comentari> comentaris=new ArrayList<Comentari>();
+	public Comentari getComentariPerId (int id) {
+		Comentari c=null;
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -106,8 +106,7 @@ public class RepositoriComentaris extends Repositori implements IRepositoriComen
 			pstmt.setInt(1,id);
 			rs=pstmt.executeQuery();
 			while (rs.next()) {
-				Comentari c = crearComentari(rs);
-				comentaris.add(c);
+				c = crearComentari(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -117,7 +116,7 @@ public class RepositoriComentaris extends Repositori implements IRepositoriComen
 			try {pstmt.close();} catch (Exception e2) {;}
 			try {rs.close();} catch (Exception e3) {;}
 		}
-		return comentaris;
+		return c;
 	}
 
 	@Override

@@ -7,4 +7,9 @@
             url="jdbc:h2:~/curs-escert"
             username="sa" password="">
   </Resource>
+
+  <Realm className="org.apache.catalina.realm.DataSourceRealm"
+   dataSourceName="jdbc/escert" localDataSource="true"
+   userTable="usuaris" userNameCol="username" userCredCol="password" digest="sha-256"
+   userRoleTable="usuaris" roleNameCol="rol"/>
 </Context>

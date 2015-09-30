@@ -17,7 +17,7 @@ public class EsborrarComentariServlet extends HttpServlet {
 	private IRepositoriComentaris repositoriComentaris=RepositoriFactory.getRepositoriComentaris();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username=(String)(request.getSession().getAttribute("username"));
+		String username=request.getRemoteUser();
 		int id=Integer.parseInt(request.getParameter("id"));
 		Comentari c=repositoriComentaris.getComentariPerId(id);
 		if (c==null || (!c.getAutor().equals(username))) {

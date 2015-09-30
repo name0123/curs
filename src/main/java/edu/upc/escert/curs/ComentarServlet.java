@@ -23,18 +23,13 @@ public class ComentarServlet extends HttpServlet {
 	public static PolicyFactory policyHTML = Sanitizers.FORMATTING.and(Sanitizers.LINKS);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getSession().getAttribute("username")==null) {
-			response.sendRedirect("login");
-			return;
-		}
-		request.setAttribute("username",request.getSession().getAttribute("username"));
+		request.setAttribute("username",request.getRemoteUser());
 		request.getRequestDispatcher("/comentar.jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		String comentari=policyHTML.sanitize(request.getParameter("comentari"));
-		String autor=(String)(request.getSession().getAttribute("username"));
+		String autor=request.getRemoteUser();
 		String titol=request.getParameter("titol");
 		repositoriComentaris.afegirComentari(new Comentari(autor,titol,comentari));
 		response.sendRedirect("comentaris");

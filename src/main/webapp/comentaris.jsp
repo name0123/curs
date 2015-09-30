@@ -12,7 +12,10 @@
 		<c:forEach items="${comentaris}" var="c">
 			<div class="well">
 				<c:if test="${username==c.autor}" >
-				<a class="btn btn-default pull-right" href="esborrar?id=${c.id}">Esborrar comentari</a>
+				<c:url value="/esborrar" var="url_esborrar">
+				<c:param name="id" value="${c.id}"/>
+				</c:url>
+				<a class="btn btn-default pull-right" href="${url_esborrar}">Esborrar comentari</a>
 				</c:if>
 				<h3><c:out value="${c.titol}"/></h3>
 				<p>${c.comentari}</p>
@@ -22,8 +25,8 @@
 				<i>Publicat per <a href="${url_autor}"><c:out value="${c.autor}"></c:out></a> el dia <c:out value="${c.data}"/></i>
 			</div>
 		</c:forEach>
-
-		<a class="btn btn-lg btn-primary pull-right" href="comentar">Comentar</a>
+		<c:url value="/comentar" var="url_comentar"/>
+		<a class="btn btn-lg btn-primary pull-right" href="${url_comentar}">Comentar</a>
 
 	</div>
 </body>

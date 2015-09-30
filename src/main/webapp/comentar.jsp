@@ -20,7 +20,7 @@ $(document).ready(function() {
 <body>
 	<div class="container">
 	<h1>Afegir comentari en nom de ${username}...</h1>
-	<form method="POST">
+	<form method="POST" action="<c:url value='comentar'/>">
 		<div class="form-group">
 			<label for="titol">Titol</label>
 			<input type="text" name="titol" class="form-control"></input>

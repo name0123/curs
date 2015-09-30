@@ -34,7 +34,7 @@ public class ComentarServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String comentari=policyHTML.sanitize(request.getParameter("comentari"));
-		String autor=request.getParameter("autor");
+		String autor=(String)(request.getSession().getAttribute("username"));
 		String titol=request.getParameter("titol");
 		repositoriComentaris.afegirComentari(new Comentari(autor,titol,comentari));
 		response.sendRedirect("comentaris");

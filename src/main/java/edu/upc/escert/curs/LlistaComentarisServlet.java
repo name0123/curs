@@ -25,6 +25,7 @@ public class LlistaComentarisServlet extends HttpServlet {
 			comentaris=repositoriComentaris.getComentaris();
 		}
 		request.setAttribute("username",request.getRemoteUser());
+		request.setAttribute("autor",autor);
 		request.setAttribute("comentaris",comentaris);
 		request.getRequestDispatcher("/comentaris.jsp").forward(request,response);
 	}

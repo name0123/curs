@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
 		if (repositoriUsuaris.autenticar(username,password)) {
 			request.getSession(true).setAttribute("username", username);
-			response.sendRedirect("comentaris");
+			response.sendRedirect("comentar");
 		} else {
 			request.setAttribute("login_error",1);
 			doGet(request,response);

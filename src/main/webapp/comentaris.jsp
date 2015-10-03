@@ -8,7 +8,8 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Comentaris ${param.autor}</h1>
+		<c:if test="${not empty username}"><h1>Has entrat com a ${username}</h1></c:if>
+		<h1>Comentaris ${autor}</h1>
 		<c:forEach items="${comentaris}" var="c">
 			<div class="well">
 				<c:if test="${username==c.autor}" >

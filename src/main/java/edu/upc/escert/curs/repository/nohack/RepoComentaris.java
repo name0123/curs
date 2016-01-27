@@ -1,16 +1,16 @@
 package edu.upc.escert.curs.repository.nohack;
 
 import java.sql.Connection;
-
-
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.upc.escert.curs.Comentari;
-import edu.upc.escert.curs.repositori.*;
+import edu.upc.escert.curs.repositori.IRepositoriComentaris;
+import edu.upc.escert.curs.repositori.Repositori;
 
 public class RepoComentaris extends Repositori implements IRepositoriComentaris {
 
@@ -37,7 +37,7 @@ public class RepoComentaris extends Repositori implements IRepositoriComentaris 
 		ResultSet rs=null;
 		try {
 			conn = ds.getConnection();
-			stmt = conn.createStatement();
+			stmt = conn.prepareStatement(sql);
 			rs=stmt.executeQuery(sql);
 			while (rs.next()) {
 				Comentari c=new Comentari();
@@ -66,7 +66,37 @@ public class RepoComentaris extends Repositori implements IRepositoriComentaris 
 
 	@Override
 	public List<Comentari> getComentarisPerAutor (String autor) {
-		return getComentarisFromSQL("SELECT * FROM COMENTARIS WHERE AUTOR='"+autor+"'");
+		List<Comentari> comentaris=new ArrayList<Comentari>();
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(
+					  "select * from comentaris where autor=?");
+			pstmt.setString(1,autor);
+			
+			rs=pstmt.executeQuery();
+			
+			while (rs.next()) {
+				Comentari c=new Comentari();
+				c.setId(rs.getInt("id"));
+				c.setAutor(rs.getString("autor"));
+				c.setTitol(rs.getString("titol"));
+				c.setComentari(rs.getString("comentari"));
+				c.setData(rs.getDate("data"));
+				comentaris.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			try {conn.close();} catch (Exception e1) {;}
+			try {pstmt.close();} catch (Exception e2) {;}
+			try {rs.close();} catch (Exception e3) {;}
+		}
+
+		return comentaris;
 	}
 
 	@Override

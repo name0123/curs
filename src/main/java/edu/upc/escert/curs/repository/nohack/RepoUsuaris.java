@@ -24,7 +24,7 @@ public class RepoUsuaris extends Repositori implements IRepositoriUsuaris {
 		try {
 			conn = ds.getConnection();
 			stmt = conn.createStatement();
-			String sql="SELECT count(*) FROM USUARIS WHERE USERNAME='"+username +"' AND PASSWORD='"+password+"'";
+			String sql="SELECT count(*) FROM USUARIS WHERE USERNAME=? AND PASSWORD=?";
 			System.out.println("Executo consulta SQL:"+sql);
 			rs=stmt.executeQuery(sql);
 			rs.next();

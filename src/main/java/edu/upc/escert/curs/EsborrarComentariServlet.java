@@ -18,8 +18,17 @@ public class EsborrarComentariServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("id");
-		repositoriComentaris.esborrarComentari(Integer.parseInt(id));
-		response.sendRedirect("comentaris");
+		int i = Integer.parseInt(id);
+		Comentari c = repositoriComentaris.getComentariPerId(i);
+		//System.out.println(c.getAutor() + ' ' + request.getParameter("author"));
+		if(request.getParameter("author").equals(c.getAutor())){
+			repositoriComentaris.esborrarComentari(Integer.parseInt(id));
+			response.sendRedirect("comentaris");	
+		}
+		else{
+			response.sendError(HttpServletResponse.SC_FORBIDDEN);
+		}
+		
 	}
 
 }

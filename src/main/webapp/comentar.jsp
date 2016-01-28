@@ -26,7 +26,7 @@ $(document).ready(function() {
 			<input type="text" name="titol" class="form-control"></input>
 			<label for="comentari">Comentari</label>
 			<textarea id="summernote" name="comentari" class="form-control"></textarea>
-			<input type="hidden" name="autor" value="${username}">
+			
 		</div>
 		<button class="btn btn-lg btn-primary pull-right" type="submit">Comentar</button>
 	</form>

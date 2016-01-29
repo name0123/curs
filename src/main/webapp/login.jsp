@@ -12,14 +12,14 @@
 		<c:if test="${not empty login_error}">
 			<div class="alert alert-danger">Username o password incorrecte</div>
 		</c:if>
-		<form action="login" method="POST" class="form-signin">
+		<form action="j_security_check" method="POST" class="form-signin">
 			<div class="form-group">
-				<label for="username">Username</label>
-				<input type="text" name="username" class="form-control">
+				<label for="j_username">Username</label>
+				<input type="text" name="j_username" class="form-control">
 			</div>
 			<div class="form-group">
-				<label for="password">Password</label>
-				<input type="password" name="password" class="form-control">
+				<label for="j_password">Password</label>
+				<input type="password" name="j_password" class="form-control">
 			</div>
 			<button class="btn btn-lg btn-primary pull-right" type="submit">Login</button>
 		</form>

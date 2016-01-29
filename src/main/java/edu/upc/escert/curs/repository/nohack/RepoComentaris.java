@@ -72,10 +72,8 @@ public class RepoComentaris extends Repositori implements IRepositoriComentaris 
 		ResultSet rs=null;
 		try {
 			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(
-					  "select * from comentaris where autor=?");
+			pstmt = conn.prepareStatement("select * from comentaris where autor=?");
 			pstmt.setString(1,autor);
-			
 			rs=pstmt.executeQuery();
 			
 			while (rs.next()) {

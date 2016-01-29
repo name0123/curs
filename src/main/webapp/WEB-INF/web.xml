@@ -21,5 +21,24 @@
 	<error-page>
 	    <location>/html/error.html</location>
 	</error-page>
+	
+	 <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>protegit</web-resource-name>
+        <url-pattern>/esborrar</url-pattern>
+        <url-pattern>/comentar</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>usuari</role-name>
+        <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/login.jsp</form-login-page>
+      <form-error-page>/error.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
 
 </web-app>

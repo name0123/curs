@@ -20,8 +20,9 @@ public class EsborrarComentariServlet extends HttpServlet {
 		String id=request.getParameter("id");
 		int i = Integer.parseInt(id);
 		Comentari c = repositoriComentaris.getComentariPerId(i);
+		
 		//System.out.println(c.getAutor() + ' ' + request.getParameter("author"));
-		if(request.getParameter("author").equals(c.getAutor())){
+		if(request.getRemoteUser().equals(c.getAutor())){
 			repositoriComentaris.esborrarComentari(Integer.parseInt(id));
 			response.sendRedirect("comentaris");	
 		}
